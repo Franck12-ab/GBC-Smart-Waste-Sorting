@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # ✅ Add this
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import numpy as np
@@ -6,7 +7,9 @@ from PIL import Image
 import io
 
 app = Flask(__name__)
-model = load_model("Models/smart_waste_sorting_model.keras")  # Updated path and extension
+CORS(app)  # ✅ Enable CORS here
+
+model = load_model("../Models/smart_waste_sorting_model.keras")
 
 class_names = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
 
